@@ -1,7 +1,7 @@
 
 largestPalindromeProduct :: Int
-largestPalindromeProduct = head $ reverse $
-  [ x * y | x <- [100..999], y <- [100..999], isPalindrom (x * y) ]
+largestPalindromeProduct = head $
+  [ x * y | x <- [999,998..100], y <- [999,998..100], isPalindrom (x * y) ]
 
 isPalindrom :: Int -> Bool
 isPalindrom n = n == reverseNumber n 0
