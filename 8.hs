@@ -1,6 +1,7 @@
+import Data.Int
+import Data.Char
 
-
-number :: [Double]
+number :: [Int]
 number = map toValue
     "73167176531330624919225119674426574742355349194934\
     \96983520312774506326239578318016984801869478851843\
@@ -23,28 +24,13 @@ number = map toValue
     \05886116467109405077541002256983155200055935729725\
     \71636269561882670428252483600823257530420752963450"
 
-largestProduct :: Int -> Double
+largestProduct :: Int -> Int
 largestProduct n = (largestProduct' n number 0)
 
-largestProduct':: Int -> [Double] -> Double -> Double
+largestProduct':: Int -> [Int] -> Int -> Int
 largestProduct' n [] maxValue = maxValue
 largestProduct' n txt maxValue =
-    largestProduct' n (tail txt) (max maxValue (foldr (+) 0 $ take n txt))
+    largestProduct' n (tail txt) (max maxValue (foldr (*) 1 $ take n txt))
 
-toValue :: Char -> Double
-toValue '0' = log 0
-toValue '1' = log 1
-toValue '2' = log 2
-toValue '3' = log 3
-toValue '4' = log 4
-toValue '5' = log 5
-toValue '6' = log 6
-toValue '7' = log 7
-toValue '8' = log 8
-toValue '9' = log 9
-
--- *Main> largestProduct 13
--- 23.88088836242183
-
--- python: round(math.exp(1) ** 23.88088836242183)
--- 23514624000
+toValue :: Char -> Int
+toValue ch = ord(ch) - ord('0')
